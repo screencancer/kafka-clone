@@ -27,7 +27,7 @@ def message_init(msg, correlation_id):
 
 def client_handling(client):
     request = client.recv(1024)
-    response = bytes(4) + request[8:12]
+    response = int.from_bytes(request[8:12], byteorder="big")
     client.sendall(message_init(0,response))
     client.close
 
