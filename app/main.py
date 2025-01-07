@@ -20,7 +20,7 @@ def main():
 
 def message_init(msg, correlation_id):
     msg_size = msg.to_bytes(4, byteorder="big", signed=True)
-
+    cid = correlation_id.to_bytes(4, byteorder="big")
     #To get find offset
     #corr_id = correlation_id.to_bytes(4, byteorder="big", signed=True)
     return(msg_size+correlation_id)
