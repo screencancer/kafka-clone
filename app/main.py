@@ -34,8 +34,8 @@ def client_handling(client):
     request = client.recv(1024)
 
     cid_bytes = int.from_bytes(request[8:12], byteorder="big")
-    api_ver = int.from_bytes(request[5:8], byteorder="big")
-    api_key = int.from_bytes(request[3:5])
+    api_ver = int.from_bytes(request[6:8], byteorder="big")
+    api_key = int.from_bytes(request[4:6])
     error_code = 0
     if api_ver not in [range(5)]:
         api_ver=4
