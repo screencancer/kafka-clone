@@ -18,16 +18,12 @@ def main():
     
     server.close
 
-def message_init(msg, correlation_id, api_ver, api_key, error_code):
+def message_init(msg, correlation_id, error_code):
     
     msg_size = msg.to_bytes(4, byteorder="big", signed=True)
     cid = correlation_id.to_bytes(4, byteorder="big")
     error_code = error_code.to_bytes(4, byteorder="big")
-    #key = api_key.to_bytes(4, byteorder="big")
-
     
-    #To get find offset
-    #corr_id = correlation_id.to_bytes(4, byteorder="big", signed=True)
     return(msg_size+cid + error_code)
 
 def client_handling(client):
@@ -42,8 +38,10 @@ def client_handling(client):
         print(api_ver)
         api_ver=4
         error_code = 35
+        print(error_code)
 
-    client.sendall(message_init(0,cid_bytes, api_ver, api_key, error_code))
+    print(error_code)
+    client.sendall(message_init(0,cid_bytes, error_code))
     client.close
 
 
