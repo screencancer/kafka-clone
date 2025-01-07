@@ -33,8 +33,8 @@ def message_init(msg, correlation_id, api_ver, api_key, error_code):
 def client_handling(client):
     request = client.recv(1024)
 
-    cid_bytes = int.from_bytes(request[8:12], byteorder="big")
-    api_ver = int.from_bytes(request[6:8], byteorder="big")
+    cid_bytes = int.from_bytes(request[8:12], byteorder="big", signed=True)
+    api_ver = int.from_bytes(request[6:8], byteorder="big", signed=True)
     api_key = int.from_bytes(request[4:6])
     error_code = 0
     print(api_ver)
