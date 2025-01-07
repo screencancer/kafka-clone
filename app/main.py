@@ -11,8 +11,8 @@ def main():
     server = socket.create_server(("localhost", 9092), reuse_port=True)
     server.accept() # wait for client
 
-    message_size = 0
-    correlation_id = 0
+    message_size = 000000000
+    correlation_id = 00000007
     
 
     
