@@ -37,9 +37,9 @@ def client_handling(client):
     api_ver = int.from_bytes(request[6:8], byteorder="big")
     api_key = int.from_bytes(request[4:6])
     error_code = 0
-    print(test)
+    print(api_ver)
     if api_ver not in [range(5)]:
-        print(test)
+        print(api_ver)
         api_ver=4
         error_code = 35
 
