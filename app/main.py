@@ -11,6 +11,9 @@ def main():
     server = socket.create_server(("localhost", 9092), reuse_port=True)
     server.accept() # wait for client
 
+    server.bind(9092)
+    server.listen(5)
+
 
 if __name__ == "__main__":
     main()
