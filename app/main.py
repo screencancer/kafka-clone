@@ -9,20 +9,24 @@ def main():
     # Uncomment this to pass the first stage
     #
     server = socket.create_server(("localhost", 9092), reuse_port=True)
-    client, _ = server.accept() # wait for client
+    client, address = server.accept() # wait for client
 
-    client.recv(1024)
-
-    message_size = 0
-    correlation_id = 7
+    client_handling(client)
     
-    client.sendall(message_size.to_bytes(4, byteorder="big", signed=True))
-    client.sendall(correlation_id.to_bytes(4, byteorder="big", signed=True))
     
-    client.close
+    
+    
     server.close
 
+def message_init(msg, correlation_id):
+    msg_size = msg.to_bytes(4, byteorder="big", signed=True)
+    corr_id = correlation_id.to_bytes(4, byteorder="big", signed=True)
+    return(msg_size+corr_id)
 
+def client_handling(client):
+    client.recv(1024)
+    client.sendall(message_init(0,7))
+    client.close
 
 
 if __name__ == "__main__":
