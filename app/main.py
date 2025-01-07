@@ -9,15 +9,18 @@ def main():
     # Uncomment this to pass the first stage
     #
     server = socket.create_server(("localhost", 9092), reuse_port=True)
-    server.accept() # wait for client
+    client, _ = server.accept() # wait for client
 
-    message_size = 0o00000000
-    correlation_id = 0o0000007
-    
+    client.recv(1024)
 
+    message_size = 0
+    correlation_id = 7
     
-    server.bind(9092)
-    server.listen(5)
+    client.sendall(message_size.to_bytes(4, byteorder="big", signed=True))
+    client.sendall(message_size.to_bytes(4, byteorder="big", signed=True))
+    
+    client.close
+    server.close
 
 
 
