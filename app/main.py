@@ -24,7 +24,7 @@ def message_init(msg, correlation_id, error_code):
     cid = correlation_id.to_bytes(4, byteorder="big")
     error_code = error_code.to_bytes(4, byteorder="big")
     
-    return(msg_size+cid + error_code)
+    return(msg_size+ error_code +cid )
 
 def client_handling(client):
     request = client.recv(1024)
@@ -38,9 +38,7 @@ def client_handling(client):
         print(api_ver)
         api_ver=4
         error_code = 35
-        print(error_code)
 
-    print(error_code)
     client.sendall(message_init(0,cid_bytes, error_code))
     client.close
 
