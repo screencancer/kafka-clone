@@ -16,8 +16,8 @@ def main():
     
 
     
-    #server.bind(9092)
-    #server.listen(5)
+    server.bind(9092)
+    server.listen(5)
 
 
 
