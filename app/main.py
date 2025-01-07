@@ -17,7 +17,7 @@ def main():
     correlation_id = 7
     
     client.sendall(message_size.to_bytes(4, byteorder="big", signed=True))
-    client.sendall(message_size.to_bytes(4, byteorder="big", signed=True))
+    client.sendall(correlation_id.to_bytes(4, byteorder="big", signed=True))
     
     client.close
     server.close
