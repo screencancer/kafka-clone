@@ -21,11 +21,18 @@ def main():
 def message_init(msg, correlation_id, error_code):
     
     print(error_code)
+
+    #len of message 4 bytes(int32)
     msg_size = msg.to_bytes(4, byteorder="big", signed=True)
+
+    #id in 4 bytes(int32)
     cid = correlation_id.to_bytes(4, byteorder="big", signed=True)
+
+    #error code in 2 bytes(int16)
     error_code = error_code.to_bytes(2, byteorder="big", signed=True)
     
-    return(msg_size+cid + error_code)
+    #return bytes
+    return(msg_size + cid + error_code)
 
 def client_handling(client):
     request = client.recv(1024)
