@@ -23,7 +23,7 @@ def message_init(msg, correlation_id, error_code):
     print(error_code)
     msg_size = msg.to_bytes(4, byteorder="big", signed=True)
     cid = correlation_id.to_bytes(4, byteorder="big", signed=True)
-    error_code = error_code.to_bytes(4, byteorder="big", signed=True)
+    error_code = error_code.to_bytes(2, byteorder="big", signed=True)
     
     return(msg_size+cid + error_code)
 
