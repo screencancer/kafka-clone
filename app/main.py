@@ -13,9 +13,6 @@ def main():
 
     client_handling(client)
     
-    
-    
-    
     server.close
 
 def message_init(msg, correlation_id, error_code):
@@ -37,11 +34,16 @@ def message_init(msg, correlation_id, error_code):
 def client_handling(client):
     request = client.recv(1024)
 
+    #defining bytes that are being grabbed from request
     cid_bytes = int.from_bytes(request[8:12], byteorder="big", signed=True)
     api_ver = int.from_bytes(request[6:8], byteorder="big", signed=True)
     api_key = int.from_bytes(request[4:6])
+
+    #Default
     error_code = 0
     print(api_ver)
+
+    #determine if valid api version
     if api_ver not in range(5):
         print(api_ver)
         api_ver=4
